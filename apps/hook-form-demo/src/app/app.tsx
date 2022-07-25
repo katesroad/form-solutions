@@ -1,8 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './app.module.scss';
 
+import QuickStart from './components/QuickStart/index';
+
 export function App() {
-  return null;
+  return <QuickStart />;
 }
 
 export default App;
