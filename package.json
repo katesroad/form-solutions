@@ -8,7 +8,9 @@
     "test": "nx test"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "react-form-hooks": "^1.1.5"
+  },
   "devDependencies": {
     "@nrwl/cli": "14.4.3",
     "@nrwl/react": "^14.4.3",
