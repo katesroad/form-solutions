@@ -21,7 +21,7 @@
         ],
         "styles": ["apps/hook-form-demo/src/styles.scss"],
         "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
+        "webpackConfig": "apps/hook-form-demo/webpack.config.js"
       },
       "configurations": {
         "development": {
