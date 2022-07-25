@@ -4,6 +4,10 @@
 
 - V7 relies on React v18
 
+## Official FAQs
+
+https://react-hook-form.com/faqs
+
 ## FAQ
 
 - How can I validate field on blur;
@@ -20,7 +24,7 @@
 
   - example: On facebook register form, if user intends to leave without filling something via clicking gray overlay, form field error shows up programatically
 
-- How to validate data remotely
+- **How to validate data remotely**
 
 - Array Field example: via [useArrayField](https://react-hook-form.com/api/usefieldarray)
 
