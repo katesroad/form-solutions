@@ -1,4 +1,8 @@
-# Quick Start Demo
+# React Hook Form POC
+
+## Dependencies
+
+- V7 relies on React v18
 
 ## FAQ
 
