@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { useForm, useFieldArray, useWatch, Control } from 'react-hook-form';
 import styled from 'styled-components';
 
@@ -7,6 +8,12 @@ type FormValues = {
     price: number;
     quantity: number;
   }[];
+};
+
+type CartItem = {
+  name: string;
+  quantity: number;
+  price: number;
 };
 
 const Item = styled.section`
@@ -44,26 +51,34 @@ const Total = ({ control }: { control: Control<FormValues> }) => {
   return <p>Total Amount: {total}</p>;
 };
 
-export default function Demo() {
+function UserCart(props: { title: string; cart: CartItem[] }) {
+  const { title, cart } = props;
+
   const {
+    reset,
     register,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({
-    defaultValues: {
-      cart: [{ name: 'test', quantity: 1, price: 23 }],
-    },
+    defaultValues: { cart },
     mode: 'onBlur',
   });
+
   const { fields, append, remove } = useFieldArray({
     name: 'cart',
     control,
   });
+
   const onSubmit = (data: FormValues) => console.log(data);
+
+  useEffect(() => {
+    reset({ cart });
+  }, [cart, reset]);
 
   return (
     <div>
+      {title && <h3>{title}</h3>}
       <form onSubmit={handleSubmit(onSubmit)}>
         {fields.map((field, index) => {
           return (
@@ -126,10 +141,38 @@ export default function Demo() {
             </div>
           );
         })}
-
-        <Total control={control} />
-        <input type="submit" />
+        {cart && (
+          <React.Fragment>
+            <Total control={control} />
+            <input type="submit" />
+          </React.Fragment>
+        )}
       </form>
     </div>
+  );
+}
+
+export default function Demo() {
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCart([
+        {
+          name: 'Apple',
+          quantity: 12,
+          price: 12,
+        },
+      ]);
+    }, 2500);
+  }, []);
+
+  return (
+    <React.Fragment>
+      <p>
+        <strong>parent data</strong>:{JSON.stringify(cart)}
+      </p>
+      <UserCart cart={cart} title="Checkout" />
+    </React.Fragment>
   );
 }

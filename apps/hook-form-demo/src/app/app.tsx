@@ -1,7 +1,7 @@
-import ArrayField from './components/ArrayField';
+import Rerender from './components/Rerender';
 
 export function App() {
-  return <ArrayField />;
+  return <Rerender />;
 }
 
 export default App;
