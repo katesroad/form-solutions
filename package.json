@@ -13,6 +13,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-form-hooks": "^1.1.5",
+    "react-hook-form": "^7.33.1",
     "regenerator-runtime": "0.13.7",
     "tslib": "^2.3.0"
   },
