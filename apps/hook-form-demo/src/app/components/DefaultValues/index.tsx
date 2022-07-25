@@ -23,9 +23,9 @@ export default function QuickStart() {
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      "example": "not required field value",
-      exampleRequired: ""
-    }
+      example: 'not required field value',
+      exampleRequired: '',
+    },
   });
 
   const onSubmit = (data: Record<string, string>) => console.log(data);

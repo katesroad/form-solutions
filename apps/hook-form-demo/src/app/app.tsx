@@ -1,7 +1,7 @@
-import DefaultValues from './components/DefaultValues';
+import ArrayField from './components/ArrayField';
 
 export function App() {
-  return <DefaultValues />;
+  return <ArrayField />;
 }
 
 export default App;

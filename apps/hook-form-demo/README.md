@@ -17,3 +17,5 @@
   - example: On facebook register form, if user intends to leave without filling something via clicking gray overlay, form field error shows up programatically
 
 - How to validate data remotely
+
+- Array Field example: via [useArrayField](https://react-hook-form.com/api/usefieldarray)

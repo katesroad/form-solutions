@@ -21,7 +21,7 @@ export default function QuickStart() {
     watch,
     formState: { errors },
   } = useForm({
-    mode: 'onBlur'
+    mode: 'onBlur',
   });
 
   const onSubmit = (data: Record<string, string>) => console.log(data);
