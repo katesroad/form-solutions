@@ -1,7 +1,7 @@
-import Rerender from './components/Rerender';
+import MultipleSteps from './components/MultipleSteps';
 
 export function App() {
-  return <Rerender />;
+  return <MultipleSteps />;
 }
 
 export default App;
