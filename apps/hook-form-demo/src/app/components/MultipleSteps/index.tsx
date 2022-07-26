@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import styled from 'styled-components';
 import BillingAddress from './BillingAddress';
 import BillingConformation from './BillingConfirmation';
 import BillingInfo from './BillingInfo';
+import Button from './Button';
 
 import formContext from './FormContext';
 
 type FormValues = Record<string, string | boolean>;
+
+const Wrapper = styled.main`
+  margin: 2rem auto;
+`;
 
 export default function MultipleStepsForm() {
   const [formValues, setFormValues] = useState<FormValues>({});
@@ -17,7 +23,7 @@ export default function MultipleStepsForm() {
     setCurrentStep((currentStep) => currentStep - 1);
   };
 
-  const updateFormData = (newValues: FormValues) => {
+  const updateFormValues = (newValues: FormValues) => {
     setFormValues({
       ...formValues,
       ...newValues,
@@ -25,20 +31,24 @@ export default function MultipleStepsForm() {
   };
 
   return (
-    <formContext.Provider
-      value={{
-        currentStep,
-        formValues,
-        setCurrentStep,
-        setFormValues: updateFormData,
-      }}
-    >
-      <h3>Step {currentStep} of 3</h3>
-      {currentStep > 1 && <button onClick={handleButtonClick}>Back</button>}
-      {currentStep === 1 && <BillingInfo />}
-      {currentStep === 2 && <BillingAddress />}
-      {currentStep === 3 && <BillingConformation />}
-      {currentStep === 4 && <p>{JSON.stringify(formValues)}</p>}
-    </formContext.Provider>
+    <Wrapper>
+      <formContext.Provider
+        value={{
+          currentStep,
+          formValues,
+          setCurrentStep,
+          updateFormValues,
+        }}
+      >
+        <h3>Step {currentStep} of 3</h3>
+        {currentStep > 1 && <Button onClick={handleButtonClick}>Back</Button>}
+
+        {currentStep === 1 && <BillingInfo />}
+        {currentStep === 2 && <BillingAddress />}
+        {currentStep === 3 && <BillingConformation />}
+
+        {currentStep === 4 && <p>{JSON.stringify(formValues)}</p>}
+      </formContext.Provider>
+    </Wrapper>
   );
 }

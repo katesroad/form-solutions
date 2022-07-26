@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   border: none;
-  color: white;
-  background-color: #eee;
+  padding: 4px;
+  border-radius: 2px;
   cursor: pointer;
   &: [disabled] {
     background-color: gray;

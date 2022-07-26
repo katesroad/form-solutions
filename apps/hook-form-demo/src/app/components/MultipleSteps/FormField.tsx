@@ -1,38 +1,53 @@
 import React from 'react';
 import styled from 'styled-components';
+import classNames from 'classnames';
 
 const Wrapper = styled.div`
   .label {
     display: block;
-    font-size: 1.5rem;
-    margin-bottom: 4px;
+    margin: 0;
+  }
+
+  .control.inline {
+    display: flex;
+    align-items: center;
+
+    input {
+      margin: 0 0 0 4px;
+    }
   }
 
   input {
+    margin: 6px 0;
     border: 1px solid #eee;
+    padding: 4px;
+    border-radius: 2px;
+
+    &:focus {
+      border-color: blue;
+    }
   }
 
   .error {
     margin-top: 4px;
-    color: 4px;
-  }
-
-  &.inline {
-    display: inline-flex;
+    color: red;
+    font-size: small;
   }
 `;
 
 const FormField: React.FC<{
-  children: React.ReactNode;
+  children: React.ReactNode[] | React.ReactNode;
+  errMsg?: string | React.ReactNode;
   label: string;
   inline?: boolean;
-}> = ({ children, inline, label }) => {
-  return (
-    <Wrapper className={inline ? 'inline' : ''}>
-      <span className="label">{label}</span>
+}> = ({ children, errMsg, label, inline }) => (
+  <Wrapper>
+    <div className={classNames('control', { inline })}>
+      <p className="label">{label}</p>
       {children}
-    </Wrapper>
-  );
-};
+    </div>
+    {errMsg && <p className="error">{errMsg}</p>}
+  </Wrapper>
+);
 
 export default FormField;

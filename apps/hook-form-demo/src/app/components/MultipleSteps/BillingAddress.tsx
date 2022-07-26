@@ -1,19 +1,32 @@
 import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import Button from './Button';
+import FormCard from './FormCard';
 
 import formContext, { FormValues } from './FormContext';
 import FormField from './FormField';
 
 const BillingAddress = () => {
-  const { formValues, currentStep, setCurrentStep, setFormValues } =
+  const { formValues, currentStep, setCurrentStep, updateFormValues } =
     useContext(formContext)!;
 
-  const { reset, register, handleSubmit } = useForm({
-    mode: 'onBlur',
+  const {
+    reset,
+    register,
+    handleSubmit,
+    formState: {
+      errors: { address },
+    },
+  } = useForm({
+    mode: 'all',
+    // It is important to set defaultValues if you want to access error message without warning
+    defaultValues: {
+      address: '',
+    },
   });
 
   const onSubmit = (data: FormValues) => {
-    setFormValues(data);
+    updateFormValues(data);
     setCurrentStep(currentStep + 1);
   };
 
@@ -23,13 +36,21 @@ const BillingAddress = () => {
     });
   }, [formValues, reset]);
 
+  const errMsg = address?.['message'];
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormField label="Address">
-        <input {...register('address', { required: true })} />
-      </FormField>
-      <button type="submit">Next</button>
-    </form>
+    <FormCard>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormField label="Billing Address" errMsg={errMsg}>
+          <input
+            {...register('address', {
+              required: 'Billing address is required',
+            })}
+          />
+        </FormField>
+        <Button type="submit">Next</Button>
+      </form>
+    </FormCard>
   );
 };
 

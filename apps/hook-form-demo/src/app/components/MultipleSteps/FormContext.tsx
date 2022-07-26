@@ -9,7 +9,7 @@ type FormValues = {
 type FormContextType = {
   currentStep: number;
   formValues: FormValues;
-  setFormValues: (newValues: FormValues) => void;
+  updateFormValues: (update: FormValues) => void;
   setCurrentStep: (step: number) => void;
 };
 

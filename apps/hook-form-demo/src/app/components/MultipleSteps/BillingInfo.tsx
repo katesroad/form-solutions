@@ -1,44 +1,57 @@
 import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button';
+import FormCard from './FormCard';
 
 import formContext, { FormValues } from './FormContext';
 import FormField from './FormField';
 
 const BillingInfo = () => {
-  const { currentStep, formValues, setCurrentStep, setFormValues } =  useContext(formContext)!;
-
-  const { register, reset, handleSubmit } = useForm({
-    mode: 'onBlur',
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { currentStep, formValues, setCurrentStep, updateFormValues } = useContext(formContext)!;
+    
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: 'all',
     defaultValues: {
       email: '',
     },
   });
 
   const onSubmit = (data: FormValues) => {
-    setFormValues(data);
+    updateFormValues(data);
     setCurrentStep(currentStep + 1);
   };
 
   useEffect(() => {
     reset({
       email: formValues['email'] ?? '',
-    })
+    });
   }, [formValues, reset]);
 
+  const errMsg = errors['email']?.message;
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormField label="Email">
-        <input
-          {...register('email', {
-            required: true,
-            pattern:
-              /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          })}
-        />
-      </FormField>
-      <Button type="submit">Next</Button>
-    </form>
+    <FormCard>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormField label="Email" errMsg={errMsg}>
+          <input
+            {...register('email', {
+              required: 'Email is required',
+              pattern: {
+                value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                message: 'Please input a valid email',
+              },
+            })}
+          />
+        </FormField>
+        <Button type="submit">Next</Button>
+      </form>
+    </FormCard>
   );
 };
 

@@ -1,19 +1,29 @@
 import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import Button from './Button';
+import FormCard from './FormCard';
 
 import formContext, { FormValues } from './FormContext';
 import FormField from './FormField';
 
 const BillingConformation = () => {
-  const { formValues, currentStep, setCurrentStep, setFormValues } =
-    useContext(formContext)!;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { formValues, currentStep, setCurrentStep, updateFormValues } = useContext(formContext)!;
 
-  const { register, reset, handleSubmit } = useForm({
-    mode: 'onBlur',
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: 'all',
+    defaultValues: {
+      confirmed: false,
+    },
   });
 
   const onSubmit = (data: FormValues) => {
-    setFormValues(data);
+    updateFormValues(data);
     setCurrentStep(currentStep + 1);
   };
 
@@ -23,13 +33,22 @@ const BillingConformation = () => {
     });
   }, [formValues, reset]);
 
+  const errMsg = errors['confirmed']?.message;
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormField label="Confirm" inline>
-        <input type="checkbox" {...register('confirmed', { required: true })} />
-      </FormField>
-      <button type="submit">Next</button>
-    </form>
+    <FormCard>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormField label="Confirm" errMsg={errMsg} inline>
+          <input
+            type="checkbox"
+            {...register('confirmed', {
+              required: 'Please confirm your information',
+            })}
+          />
+        </FormField>
+        <Button type="submit">Next</Button>
+      </form>
+    </FormCard>
   );
 };
 
