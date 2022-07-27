@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
+import Datepicker from './Datepicker';
 import FormField from './FormField';
 import Select from './Select';
 
@@ -44,7 +45,7 @@ export default function EmissionFactor({ index, children, name }: Props) {
         ]}
       />
       <FormField label="Timestamp">
-        <input {...register(`${name}.${index}.timestamp`)} />
+        <Datepicker />
       </FormField>
       {children}
     </Wrapper>
