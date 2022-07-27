@@ -8,7 +8,8 @@ import FormField from './FormField';
 
 const BillingConformation = () => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const { formValues, currentStep, setCurrentStep, updateFormValues } = useContext(formContext)!;
+  const { formValues, currentStep, setCurrentStep, updateFormValues } =
+    useContext(formContext)!;
 
   const {
     register,
@@ -40,6 +41,7 @@ const BillingConformation = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormField label="Confirm" errMsg={errMsg} inline>
           <input
+            autoFocus
             type="checkbox"
             {...register('confirmed', {
               required: 'Please confirm your information',

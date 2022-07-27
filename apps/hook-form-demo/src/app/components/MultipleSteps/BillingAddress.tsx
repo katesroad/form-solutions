@@ -7,6 +7,7 @@ import formContext, { FormValues } from './FormContext';
 import FormField from './FormField';
 
 const BillingAddress = () => {
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { formValues, currentStep, setCurrentStep, updateFormValues } =
     useContext(formContext)!;
 
@@ -43,6 +44,7 @@ const BillingAddress = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormField label="Billing Address" errMsg={errMsg}>
           <input
+            autoFocus
             {...register('address', {
               required: 'Billing address is required',
             })}

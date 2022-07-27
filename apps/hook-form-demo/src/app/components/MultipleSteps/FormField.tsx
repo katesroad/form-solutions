@@ -23,6 +23,10 @@ const Wrapper = styled.div`
     padding: 4px;
     border-radius: 2px;
 
+    &: [type=checkbox] {
+      cursor: pointer;
+    }
+
     &:focus {
       border-color: blue;
     }

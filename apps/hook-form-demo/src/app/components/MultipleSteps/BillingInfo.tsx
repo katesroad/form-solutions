@@ -8,8 +8,9 @@ import FormField from './FormField';
 
 const BillingInfo = () => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const { currentStep, formValues, setCurrentStep, updateFormValues } = useContext(formContext)!;
-    
+  const { currentStep, formValues, setCurrentStep, updateFormValues } =
+    useContext(formContext)!;
+
   const {
     register,
     reset,
@@ -40,10 +41,12 @@ const BillingInfo = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormField label="Email" errMsg={errMsg}>
           <input
+            autoFocus
             {...register('email', {
               required: 'Email is required',
               pattern: {
-                value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                value:
+                  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: 'Please input a valid email',
               },
             })}
