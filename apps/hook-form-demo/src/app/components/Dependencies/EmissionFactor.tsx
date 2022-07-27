@@ -27,7 +27,7 @@ export default function EmissionFactor({ index, children, name }: Props) {
       </FormField>
       <Select
         label="Units"
-        name={name}
+        name={`${name}.${index}.units`}
         options={[
           {
             label: 'Please select units',

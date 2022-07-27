@@ -1,14 +1,9 @@
-import React from 'react';
-import {
-  useForm,
-  FormProvider,
-  useFormContext,
-  useFieldArray,
-} from 'react-hook-form';
+import { useForm, FormProvider, useFieldArray } from 'react-hook-form';
 import Button from './Button';
 import EmissionFactor from './EmissionFactor';
 import FormField from './FormField';
 import OccupancyClass from './OccupancyClass';
+import RequireAuth from './RequireAuth';
 
 export default function App() {
   const methods = useForm({
@@ -24,7 +19,7 @@ export default function App() {
         {
           commondity: '',
           factor: '',
-          units: '',
+          units: 'none',
           timestamp: '',
         },
       ],
@@ -52,14 +47,18 @@ export default function App() {
     control: methods.control,
   });
 
+  const isAuthed = methods.watch('isAuthed');
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(onSubmit)}>
         {/* Occupancy class */}
         {occupancyClasses.map((item, index) => (
-          <OccupancyClass index={index} name="commondities" key={index}>
+          <OccupancyClass index={index} name="classes" key={index}>
             <p>
-              <Button onClick={() => removeOccpanyClass(index)}>-</Button>
+              {occupancyClasses.length > 1 && (
+                <Button onClick={() => removeOccpanyClass(index)}>-</Button>
+              )}
               {index + 1 === occupancyClasses.length && (
                 <Button
                   type="button"
@@ -82,7 +81,9 @@ export default function App() {
         {commondities.map((item, index) => (
           <EmissionFactor index={index} name="commondities" key={index}>
             <p>
-              <Button onClick={() => removeCommodity(index)}>-</Button>
+              {commondities.length > 1 && (
+                <Button onClick={() => removeCommodity(index)}>-</Button>
+              )}
               {index + 1 === commondities.length && (
                 <Button
                   type="button"
@@ -90,7 +91,7 @@ export default function App() {
                     addCommondity({
                       commondity: '',
                       factor: '',
-                      units: '',
+                      units: 'none',
                       timestamp: '',
                     })
                   }
@@ -102,7 +103,7 @@ export default function App() {
           </EmissionFactor>
         ))}
         {/* Sign in */}
-        <FormField label="Authorized" inline>
+        <FormField label="Add Authed By" inline>
           <input
             type="checkbox"
             {...methods.register('isAuthed', {
@@ -110,6 +111,7 @@ export default function App() {
             })}
           />
         </FormField>
+        {isAuthed && <RequireAuth />}
         <input type="submit" />
       </form>
     </FormProvider>

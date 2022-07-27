@@ -6,6 +6,7 @@ import MultipleStepsForm from './components/MultipleSteps';
 import DefaultValues from './components/DefaultValues';
 import QuickStart from './components/DefaultValues';
 import Rerender from './components/Rerender';
+import Dependencies from './components/Dependencies';
 
 import './app.module.scss';
 
@@ -27,6 +28,7 @@ const Wrapper = styled.div`
 
     a {
       display: block;
+      margin-bottom: 2px;
     }
   }
 
@@ -41,6 +43,7 @@ const Index = () => {
         <Link to="array">Array Fields</Link>
         <Link to="default-values">Default Values</Link>
         <Link to="rerender">Mock Fetch Data</Link>
+        <Link to="conditional">Conditional</Link>
       </nav>
 
       <div className="demo">
@@ -60,6 +63,7 @@ export function App() {
           <Route path="/default-values" element={<DefaultValues />} />
           <Route path="/quick-start" element={<QuickStart />} />
           <Route path="/rerender" element={<Rerender />} />
+          <Route path="/conditional" element={<Dependencies />} />
         </Route>
       </Routes>
     </BrowserRouter>

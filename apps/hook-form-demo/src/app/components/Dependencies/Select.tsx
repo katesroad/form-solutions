@@ -8,11 +8,14 @@ export type Props = {
 };
 
 export default function Select({ name, options, label }: Props) {
-  const { register } = useFormContext();
+  const { register, getValues } = useFormContext();
+
+  const value = getValues(name);
 
   return (
     <FormField label={label}>
-      <select {...register(name)}>
+      {/* Must be defaultValue here */}
+      <select {...register(name)} defaultValue={value}>
         {options.map((option) => (
           <option value={option.value} key={option.value}>
             {option.label}
