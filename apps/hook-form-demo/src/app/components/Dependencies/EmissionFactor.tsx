@@ -45,7 +45,7 @@ export default function EmissionFactor({ index, children, name }: Props) {
         ]}
       />
       <FormField label="Timestamp">
-        <Datepicker />
+        <Datepicker name={`${name}.${index}.factors`} />
       </FormField>
       {children}
     </Wrapper>
