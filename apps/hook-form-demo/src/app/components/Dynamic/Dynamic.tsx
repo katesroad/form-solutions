@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import FormField from './FormField';
@@ -27,6 +28,16 @@ export default function Dynamic() {
   const { data: limits = [], isLoading: isLoadingLimits } = useGetLimits(
     methods.getValues('classType')
   );
+
+
+  useEffect(() => {
+    methods.setValue('limit', '', {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: false
+    });
+  }, [classType, methods]);
+
 
   return (
     <FormProvider {...methods}>
