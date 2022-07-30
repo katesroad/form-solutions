@@ -7,6 +7,7 @@ import DefaultValues from './components/DefaultValues';
 import QuickStart from './components/DefaultValues';
 import Rerender from './components/Rerender';
 import Dependencies from './components/Dependencies';
+import Dynamic from './components/Dynamic';
 
 import './app.module.scss';
 
@@ -31,7 +32,6 @@ const Wrapper = styled.div`
       margin-bottom: 2px;
     }
   }
-
 `;
 
 const Index = () => {
@@ -44,6 +44,7 @@ const Index = () => {
         <Link to="default-values">Default Values</Link>
         <Link to="rerender">Mock Fetch Data</Link>
         <Link to="conditional">Conditional</Link>
+        <Link to="dynamic">Dynamic</Link>
       </nav>
 
       <div className="demo">
@@ -55,18 +56,19 @@ const Index = () => {
 
 export function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Index />}>
-          <Route path="/multiple-steps" element={<MultipleStepsForm />} />
-          <Route path="/array" element={<ArrayField />} />
-          <Route path="/default-values" element={<DefaultValues />} />
-          <Route path="/quick-start" element={<QuickStart />} />
-          <Route path="/rerender" element={<Rerender />} />
-          <Route path="/conditional" element={<Dependencies />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />}>
+            <Route path="/multiple-steps" element={<MultipleStepsForm />} />
+            <Route path="/array" element={<ArrayField />} />
+            <Route path="/default-values" element={<DefaultValues />} />
+            <Route path="/quick-start" element={<QuickStart />} />
+            <Route path="/rerender" element={<Rerender />} />
+            <Route path="/conditional" element={<Dependencies />} />
+            <Route path="/dynamic" element={<Dynamic />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
   );
 }
 

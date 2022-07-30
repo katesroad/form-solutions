@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "hook-form-demo": "apps/hook-form-demo",
-    "hook-form-demo-e2e": "apps/hook-form-demo-e2e"
+    "hook-form-demo-e2e": "apps/hook-form-demo-e2e",
+    "server": "apps/server"
   }
 }
