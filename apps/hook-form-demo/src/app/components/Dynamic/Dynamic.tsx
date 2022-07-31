@@ -19,8 +19,10 @@ export default function Dynamic() {
 
   const classType = methods.watch('classType');
 
-  const { data: classTypes, isLoading: isLoadingClassTypes } =
-    useGetClassTypes();
+  const { 
+    data: classTypes, 
+    isLoading: isLoadingClassTypes,
+  } = useGetClassTypes();
 
   const { data: limits, isLoading: isLoadingLimits } = useGetLimits(
     methods.getValues('classType')
@@ -36,6 +38,7 @@ export default function Dynamic() {
 
   return (
     <FormProvider {...methods}>
+      {/* https://react-hook-form.com/advanced-usage#FormProviderPerformance */}
       <form action="" onSubmit={handleSubmit}>
         <h3>Model information</h3>
         <Select
@@ -60,8 +63,7 @@ export default function Dynamic() {
           validation={{ required: 'limit is required' }}
           options={[
             {
-              label:
-                !!classType && isLoadingLimits
+              label: (!!classType && isLoadingLimits)
                   ? `Is fetching limit...`
                   : 'Please select limit',
               value: '',
