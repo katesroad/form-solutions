@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import classNames from 'classnames';
 
 const Wrapper = styled.div`
+  margin-bottom: 10px;
   .label {
     display: block;
     margin: 0;

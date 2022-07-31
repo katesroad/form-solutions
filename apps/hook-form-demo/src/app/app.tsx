@@ -56,19 +56,19 @@ const Index = () => {
 
 export function App() {
   return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />}>
-            <Route path="/multiple-steps" element={<MultipleStepsForm />} />
-            <Route path="/array" element={<ArrayField />} />
-            <Route path="/default-values" element={<DefaultValues />} />
-            <Route path="/quick-start" element={<QuickStart />} />
-            <Route path="/rerender" element={<Rerender />} />
-            <Route path="/conditional" element={<Dependencies />} />
-            <Route path="/dynamic" element={<Dynamic />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Index />}>
+          <Route path="/multiple-steps" element={<MultipleStepsForm />} />
+          <Route path="/array" element={<ArrayField />} />
+          <Route path="/default-values" element={<DefaultValues />} />
+          <Route path="/quick-start" element={<QuickStart />} />
+          <Route path="/rerender" element={<Rerender />} />
+          <Route path="/conditional" element={<Dependencies />} />
+          <Route path="/dynamic" element={<Dynamic />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

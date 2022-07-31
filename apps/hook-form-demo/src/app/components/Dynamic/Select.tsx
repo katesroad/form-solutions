@@ -13,7 +13,13 @@ export default function Select({ name, options, disabled, required }: Props) {
   const value = getValues(name);
 
   return (
-    <select {...register(name, { disabled, required })} defaultValue={value}>
+    <select
+      {...register(name, {
+        disabled,
+        required: required ? `${name} is required` : undefined,
+      })}
+      defaultValue={value}
+    >
       {options.map((option) => (
         <option value={option.value} key={option.value}>
           {option.label}

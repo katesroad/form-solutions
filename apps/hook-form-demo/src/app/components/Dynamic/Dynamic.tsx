@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 
 import FormField from './FormField';
 import Select from './Select';
@@ -20,24 +21,20 @@ export default function Dynamic() {
 
   const classType = methods.watch('classType');
 
-  const { 
-      data: classTypes = [],
-      isLoading: isLoadingClassTypes
-    } = useGetClassTypes();
+  const { data: classTypes = [], isLoading: isLoadingClassTypes } =
+    useGetClassTypes();
 
   const { data: limits = [], isLoading: isLoadingLimits } = useGetLimits(
     methods.getValues('classType')
   );
 
-
   useEffect(() => {
     methods.setValue('limit', '', {
-      shouldDirty: true,
-      shouldTouch: true,
-      shouldValidate: false
+      shouldDirty: false,
+      shouldTouch: false,
+      shouldValidate: false,
     });
   }, [classType, methods]);
-
 
   return (
     <FormProvider {...methods}>
@@ -47,6 +44,7 @@ export default function Dynamic() {
           <Select
             name="classType"
             disabled={isLoadingClassTypes}
+            required
             options={[
               {
                 label: isLoadingClassTypes
@@ -56,23 +54,33 @@ export default function Dynamic() {
               },
               ...classTypes,
             ]}
-          ></Select>
+          />
+          <ErrorMessage
+            errors={methods.formState.errors}
+            name="classType"
+            render={({ message }) => <p className="error">{message}</p>}
+          />
         </FormField>
         <FormField label="limit">
           <Select
             name="limit"
             disabled={!classType}
+            required
             options={[
               {
-                label:
-                  !!classType && isLoadingLimits
+                label: (!!classType && isLoadingLimits)
                     ? `Is fetching limit...`
                     : 'Please select limit',
                 value: '',
               },
               ...limits,
             ]}
-          ></Select>
+          />
+          <ErrorMessage
+            errors={methods.formState.errors}
+            name="limit"
+            render={({ message }) => <p className="error">{message}</p>}
+          />
         </FormField>
         <button
           type="submit"
