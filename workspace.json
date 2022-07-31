@@ -4,6 +4,7 @@
   "projects": {
     "hook-form-demo": "apps/hook-form-demo",
     "hook-form-demo-e2e": "apps/hook-form-demo-e2e",
-    "server": "apps/server"
+    "server": "apps/server",
+    "shared-components": "libs/shared-components"
   }
 }
