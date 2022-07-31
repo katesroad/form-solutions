@@ -1,7 +1,6 @@
+import { Button, Select } from '@form-solutions/shared-components';
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-
-import Select from './Select';
 
 import { useGetClassTypes, useGetLimits } from './queries';
 
@@ -19,10 +18,8 @@ export default function Dynamic() {
 
   const classType = methods.watch('classType');
 
-  const { 
-    data: classTypes, 
-    isLoading: isLoadingClassTypes,
-  } = useGetClassTypes();
+  const { data: classTypes, isLoading: isLoadingClassTypes } =
+    useGetClassTypes();
 
   const { data: limits, isLoading: isLoadingLimits } = useGetLimits(
     methods.getValues('classType')
@@ -63,7 +60,8 @@ export default function Dynamic() {
           validation={{ required: 'limit is required' }}
           options={[
             {
-              label: (!!classType && isLoadingLimits)
+              label:
+                !!classType && isLoadingLimits
                   ? `Is fetching limit...`
                   : 'Please select limit',
               value: '',
@@ -71,12 +69,12 @@ export default function Dynamic() {
             ...(limits ?? []),
           ]}
         />
-        <button
+        <Button
           type="submit"
           disabled={!methods.formState.isValid && methods.formState.isDirty}
         >
           Submit
-        </button>
+        </Button>
       </form>
     </FormProvider>
   );

@@ -1,8 +1,6 @@
+import { FormField, Select, Datepicker } from '@form-solutions/shared-components';
 import { useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
-import Datepicker from './Datepicker';
-import FormField from './FormField';
-import Select from './Select';
 
 type Props = {
   index: number;

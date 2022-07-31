@@ -1,6 +1,6 @@
+import { FormField } from '@form-solutions/shared-components';
 import { useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
-import FormField from './FormField';
 
 const Wrapper = styled.div`
   margin-bottom: 1rem;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
 
@@ -10,7 +9,7 @@ type Props = {
   name: string;
 };
 
-export default function Datepicker({ name }: Props) {
+export function Datepicker({ name }: Props) {
   const { control } = useFormContext();
 
   return (

@@ -1,6 +1,6 @@
+import { FormField } from '@form-solutions/shared-components';
 import { useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
-import FormField from './FormField';
 
 type Props = {
   index: number;

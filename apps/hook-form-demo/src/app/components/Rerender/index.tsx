@@ -1,6 +1,11 @@
+import {
+  Button,
+  ButtonGroup,
+  FormField,
+  FormFieldGroup,
+} from '@form-solutions/shared-components';
 import React, { useEffect, useState } from 'react';
 import { useForm, useFieldArray, useWatch, Control } from 'react-hook-form';
-import styled from 'styled-components';
 
 type FormValues = {
   cart: {
@@ -15,29 +20,6 @@ type CartItem = {
   quantity: number;
   price: number;
 };
-
-const Item = styled.section`
-  display: flex;
-  align-items: center;
-  margin-bottom: 2px;
-
-  input {
-    margin: 0 8px;
-  }
-
-  button {
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
-    background-color: transparent;
-    border: none;
-    border: 1px solid #eee;
-  }
-
-  p {
-    margin-top: 0;
-  }
-`;
 
 const Total = ({ control }: { control: Control<FormValues> }) => {
   const formValues = useWatch({
@@ -77,78 +59,71 @@ function UserCart(props: { title: string; cart: CartItem[] }) {
   }, [cart, reset]);
 
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       {title && <h3>{title}</h3>}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {fields.map((field, index) => {
-          return (
-            <div key={field.id}>
-              <Item className={'section'} key={field.id}>
-                <p>
-                  <span>Name</span>
-                  <input
-                    placeholder="name"
-                    {...register(`cart.${index}.name` as const, {
-                      required: true,
-                    })}
-                    className={errors?.cart?.[index]?.name ? 'error' : ''}
-                  />
-                </p>
-                <p>
-                  <span>Number</span>
-                  <input
-                    placeholder="quantity"
-                    type="number"
-                    {...register(`cart.${index}.quantity` as const, {
-                      valueAsNumber: true,
-                      required: true,
-                    })}
-                    className={errors?.cart?.[index]?.quantity ? 'error' : ''}
-                  />
-                </p>
-                <p>
-                  <span>Quantity</span>
-                  <input
-                    placeholder="value"
-                    type="number"
-                    {...register(`cart.${index}.price` as const, {
-                      valueAsNumber: true,
-                      required: true,
-                    })}
-                    className={errors?.cart?.[index]?.price ? 'error' : ''}
-                  />
-                </p>
-                <p>
-                  <button type="button" onClick={() => remove(index)}>
-                    -
-                  </button>
-                  {index + 1 === fields.length && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        append({
-                          name: '',
-                          quantity: 0,
-                          price: 0,
-                        })
-                      }
-                    >
-                      +
-                    </button>
-                  )}
-                </p>
-              </Item>
-            </div>
-          );
-        })}
-        {cart && (
-          <React.Fragment>
-            <Total control={control} />
-            <input type="submit" />
-          </React.Fragment>
-        )}
-      </form>
-    </div>
+      {fields.map((field, index) => {
+        return (
+          <FormFieldGroup key={field.id}>
+            <FormField label="Name" key={field.id}>
+              <input
+                placeholder="name"
+                {...register(`cart.${index}.name` as const, {
+                  required: true,
+                })}
+                className={errors?.cart?.[index]?.name ? 'error' : ''}
+              />
+            </FormField>
+            <FormField label="Number">
+              <input
+                placeholder="quantity"
+                type="number"
+                {...register(`cart.${index}.quantity` as const, {
+                  valueAsNumber: true,
+                  required: true,
+                })}
+                className={errors?.cart?.[index]?.quantity ? 'error' : ''}
+              />
+            </FormField>
+            <FormField label="Quantity">
+              <input
+                placeholder="value"
+                type="number"
+                {...register(`cart.${index}.price` as const, {
+                  valueAsNumber: true,
+                  required: true,
+                })}
+                className={errors?.cart?.[index]?.price ? 'error' : ''}
+              />
+            </FormField>
+            <ButtonGroup>
+              <Button type="button" onClick={() => remove(index)}>
+                -
+              </Button>
+              {index + 1 === fields.length && (
+                <Button
+                  type="button"
+                  onClick={() =>
+                    append({
+                      name: '',
+                      quantity: 0,
+                      price: 0,
+                    })
+                  }
+                >
+                  +
+                </Button>
+              )}
+            </ButtonGroup>
+          </FormFieldGroup>
+        );
+      })}
+      {cart && (
+        <React.Fragment>
+          <Total control={control} />
+          <Button type="submit">Submit</Button>
+        </React.Fragment>
+      )}
+    </form>
   );
 }
 

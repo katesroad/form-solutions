@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Link, BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
+import './app.module.scss';
+
 const ArrayField = React.lazy(() => import(`./components/ArrayField`));
-const MultipleStepsForm = React.lazy(() => import(`./components/MultipleSteps`));
+const MultipleStepsForm = React.lazy(
+  () => import(`./components/MultipleSteps`)
+);
 const DefaultValues = React.lazy(() => import(`./components/DefaultValues`));
 const QuickStart = React.lazy(() => import(`./components/QuickStart`));
 const Rerender = React.lazy(() => import(`./components/Rerender`));
@@ -17,27 +21,26 @@ const Wrapper = styled.div`
   margin: 1rem auto;
   background: #fefefe;
   border: 1px solid #eee;
-
   display: flex;
   flex-direction: row;
+`;
 
-  nav {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    margin-right: 2rem;
+const Nav = styled.nav`
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin-right: 2rem;
 
-    a {
-      display: block;
-      margin-bottom: 2px;
-    }
+  a {
+    display: block;
+    margin-bottom: 2px;
   }
 `;
 
 const Index = () => {
   return (
     <Wrapper>
-      <nav>
+      <Nav>
         <Link to="quick-start">start</Link>
         <Link to="multiple-steps">Multiple Steps Form</Link>
         <Link to="array">Array Fields</Link>
@@ -46,11 +49,13 @@ const Index = () => {
         <Link to="conditional">Conditional</Link>
         <Link to="dynamic">Dynamic</Link>
         <Link to="yup-validation">Yup Validation</Link>
-      </nav>
-
-      <div className="demo">
-        <Outlet />
-      </div>
+      </Nav>
+      {/* Demo outlet */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <div className="demo">
+          <Outlet />
+        </div>
+      </Suspense>
     </Wrapper>
   );
 };

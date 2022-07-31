@@ -1,9 +1,9 @@
+import { Button } from '@form-solutions/shared-components';
 import { useState } from 'react';
 import styled from 'styled-components';
 import BillingAddress from './BillingAddress';
 import BillingConformation from './BillingConfirmation';
 import BillingInfo from './BillingInfo';
-import Button from './Button';
 
 import formContext from './FormContext';
 

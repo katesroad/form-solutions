@@ -2,8 +2,7 @@ import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { ErrorMessage } from '@hookform/error-message';
-
-import FormField from './FormField';
+import { FormField } from '@form-solutions/shared-components';
 
 type UserData = {
   firstName: string;
@@ -64,7 +63,7 @@ export default function YupValidation() {
         <ErrorMessage
           errors={errors}
           name="lastName"
-          render={({ message }) => <p className='error'>{message}</p>}
+          render={({ message }) => <p className="error">{message}</p>}
         />
       </FormField>
       <FormField label="First Name">
@@ -72,7 +71,7 @@ export default function YupValidation() {
         <ErrorMessage
           errors={errors}
           name="firstName"
-          render={({ message }) => <p className='error'>{message}</p>}
+          render={({ message }) => <p className="error">{message}</p>}
         />
       </FormField>
       <input type="submit" />

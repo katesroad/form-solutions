@@ -1,18 +1,5 @@
-import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-
-const FormField = styled.div`
-  align-items: center;
-  display: flex;
-
-  .field-input {
-    margin: 0 8px;
-  }
-
-  .error {
-    color: red;
-  }
-`;
+import { Button, FormField } from '@form-solutions/shared-components';
 
 export default function QuickStart() {
   const {
@@ -35,35 +22,20 @@ export default function QuickStart() {
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormField>
-        <p>
-          <span className="label">Not Required Field</span>
-          {/* register your input into the hook by invoking the "register" function */}
-          <input
-            className="field-input"
-            defaultValue="test"
-            {...register('example')}
-          />
-        </p>
-
+      <FormField label="not required field">
+        <span className="label">Not Required Field</span>
+        {/* register your input into the hook by invoking the "register" function */}
+        <input defaultValue="test" {...register('example')} />
         {/* include validation with required or other standard HTML validation rules */}
       </FormField>
-      <FormField>
-        <p>
-          <span>Required Field</span>
-          <input
-            className="field-input"
-            {...register('exampleRequired', { required: true })}
-          />
-        </p>
+      <FormField label="Required Field">
+        <input {...register('exampleRequired', { required: true })} />
         {/* errors will return when field validation fails  */}
         <p className="error">
           {errors['exampleRequired'] && <span>This field is required</span>}
         </p>
       </FormField>
-      <FormField>
-        <input type="submit" />
-      </FormField>
+      <Button type="submit">Submit</Button>
     </form>
   );
 }

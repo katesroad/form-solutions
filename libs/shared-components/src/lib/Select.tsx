@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 
-import FormField from './FormField';
+import { FormField } from './FormField';
 
 export type Props = {
   options: { label: string; value: string }[];
@@ -11,7 +11,7 @@ export type Props = {
   validation?: { required: boolean | string };
 };
 
-export default function Select({
+function Select({
   name,
   options,
   disabled,
@@ -53,3 +53,5 @@ export default function Select({
     </FormField>
   );
 }
+
+export { Select };

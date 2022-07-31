@@ -31,6 +31,10 @@ const Wrapper = styled.div`
     &:focus {
       border-color: blue;
     }
+
+    &.error {
+      border: 1px solid red;
+    }
   }
 
   .error {
@@ -40,14 +44,29 @@ const Wrapper = styled.div`
   }
 `;
 
-const FormField: React.FC<{
+const FieldGroupWrapper = styled.div`
+  margin-bottom: 1rem;
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+  &.inline {
+    display: flex;
+    align-items: center;
+
+    .form-field {
+      margin-right: 1rem;
+    }
+  }
+`;
+
+export const FormField: React.FC<{
   children: React.ReactNode[] | React.ReactNode;
   errMsg?: string | React.ReactNode;
   label?: string;
   inline?: boolean;
   className?: string;
 }> = ({ children, className, errMsg, label, inline }) => (
-  <Wrapper className={classNames(className)}>
+  <Wrapper className={classNames(className, 'form-field')}>
     <div className={classNames('control', { inline })}>
       {label && <p className="label">{label}</p>}
       {children}
@@ -56,4 +75,16 @@ const FormField: React.FC<{
   </Wrapper>
 );
 
-export default FormField;
+export const FormFieldGroup: React.FC<{
+  children: React.ReactNode[];
+  inline?: boolean;
+  row?: boolean;
+}> = ({ children, inline, row }) => (
+  <FieldGroupWrapper
+    className={classNames('form-field-group', {
+      inline,
+    })}
+  >
+    {children}
+  </FieldGroupWrapper>
+);

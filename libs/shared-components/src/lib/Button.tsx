@@ -5,9 +5,20 @@ const Button = styled.button`
   padding: 4px;
   border-radius: 2px;
   cursor: pointer;
+  min-width: 1rem;
+
   &: [disabled] {
     background-color: gray;
   }
 `;
 
-export default Button;
+const ButtonGroup = styled.div`
+  display: inline-flex;
+  button {
+    &:not(:last-child) {
+      margin-right: 4px;
+    }
+  }
+`;
+
+export { ButtonGroup, Button };

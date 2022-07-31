@@ -1,15 +1,17 @@
+import { Button, FormField } from '@form-solutions/shared-components';
 import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import Button from './Button';
 import FormCard from './FormCard';
 
 import formContext, { FormValues } from './FormContext';
-import FormField from './FormField';
 
 const BillingConformation = () => {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const { formValues, currentStep, setCurrentStep, updateFormValues } =
-    useContext(formContext)!;
+  const { 
+    formValues,
+    currentStep,
+    setCurrentStep,
+    updateFormValues
+  } = useContext(formContext)!;
 
   const {
     register,

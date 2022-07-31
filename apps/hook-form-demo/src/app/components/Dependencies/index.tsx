@@ -1,7 +1,6 @@
+import { Button, FormField } from '@form-solutions/shared-components';
 import { useForm, FormProvider, useFieldArray } from 'react-hook-form';
-import Button from './Button';
 import EmissionFactor from './EmissionFactor';
-import FormField from './FormField';
 import OccupancyClass from './OccupancyClass';
 import RequireAuth from './RequireAuth';
 
