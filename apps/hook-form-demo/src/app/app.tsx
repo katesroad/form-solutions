@@ -8,6 +8,7 @@ import QuickStart from './components/DefaultValues';
 import Rerender from './components/Rerender';
 import Dependencies from './components/Dependencies';
 import Dynamic from './components/Dynamic';
+import YupValidation from './components/NestedValidation';
 
 import './app.module.scss';
 
@@ -45,6 +46,7 @@ const Index = () => {
         <Link to="rerender">Mock Fetch Data</Link>
         <Link to="conditional">Conditional</Link>
         <Link to="dynamic">Dynamic</Link>
+        <Link to="yup-validation">Yup Validation</Link>
       </nav>
 
       <div className="demo">
@@ -66,6 +68,7 @@ export function App() {
           <Route path="/rerender" element={<Rerender />} />
           <Route path="/conditional" element={<Dependencies />} />
           <Route path="/dynamic" element={<Dynamic />} />
+          <Route path="/yup-validation" element={<YupValidation />} />
         </Route>
       </Routes>
     </BrowserRouter>
