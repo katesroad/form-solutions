@@ -1,16 +1,15 @@
-import styled from 'styled-components';
+import React from 'react';
 import { Link, BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import styled from 'styled-components';
 
-import ArrayField from './components/ArrayField';
-import MultipleStepsForm from './components/MultipleSteps';
-import DefaultValues from './components/DefaultValues';
-import QuickStart from './components/DefaultValues';
-import Rerender from './components/Rerender';
-import Dependencies from './components/Dependencies';
-import Dynamic from './components/Dynamic';
-import YupValidation from './components/NestedValidation';
-
-import './app.module.scss';
+const ArrayField = React.lazy(() => import(`./components/ArrayField`));
+const MultipleStepsForm = React.lazy(() => import(`./components/MultipleSteps`));
+const DefaultValues = React.lazy(() => import(`./components/DefaultValues`));
+const QuickStart = React.lazy(() => import(`./components/QuickStart`));
+const Rerender = React.lazy(() => import(`./components/Rerender`));
+const Dependencies = React.lazy(() => import(`./components/Dependencies`));
+const Dynamic = React.lazy(() => import(`./components/Dynamic`));
+const YupValidation = React.lazy(() => import('./components/NestedValidation'));
 
 const Wrapper = styled.div`
   max-width: 768px;
